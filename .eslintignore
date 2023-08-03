@@ -81,13 +81,9 @@ fabric.properties
 .idea/caches/build_file_checksums.ser
 
 ### Intellij+all Patch ###
-# Ignore everything but code style settings and run configurations
-# that are supposed to be shared within teams.
+# Ignore everything
 
 .idea/*
-
-!.idea/codeStyles
-!.idea/runConfigurations
 
 ### Linux ###
 *~
