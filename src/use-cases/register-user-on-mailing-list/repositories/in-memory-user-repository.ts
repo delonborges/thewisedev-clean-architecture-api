@@ -9,20 +9,30 @@ export class InMemoryUserRepository implements UserRepository {
         this.repository = repository
     }
 
-    add(user: UserData): Promise<void> {
-        return Promise.resolve(undefined);
+    async add(user: UserData): Promise<void> {
+        const exists = await this.exists(user)
+        if (!exists) {
+            this.repository.push(user)
+        }
     }
 
-    exists(user: UserData): Promise<boolean> {
-        return Promise.resolve(false);
+    async exists(user: UserData): Promise<boolean> {
+        return await this.findUserByEmail(user.email) != null;
+
     }
 
-    findAllUsers(): Promise<UserData[]> {
+    async findAllUsers(): Promise<UserData[]> {
         return Promise.resolve([]);
     }
 
-    findUserByEmail(email: string): Promise<UserData> {
-        return null;
+    async findUserByEmail(email: string): Promise<UserData> {
+        const users = this.repository.filter((user) => {
+            return user.email === email
+        })
+        if (users.length > 0) {
+            return users[0]
+        }
+        return null
     }
 
 }
