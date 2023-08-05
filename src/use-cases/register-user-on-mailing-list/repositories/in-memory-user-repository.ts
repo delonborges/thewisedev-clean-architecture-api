@@ -24,14 +24,9 @@ export class InMemoryUserRepository implements UserRepository {
   }
 
   async findUserByEmail (email: string): Promise<UserData> {
-    const users = this.repository.filter((user) => {
-      return user.email === email
-    })
-    if (users.length > 0) {
-      return users[0]
-    }
+    const user = this.repository.find(user => user.email === email)
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-expect-error
-    return null
+    return user ?? null
   }
 }
