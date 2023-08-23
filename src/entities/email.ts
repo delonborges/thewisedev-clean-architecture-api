@@ -1,5 +1,12 @@
 export class Email {
     static validate(email: string): boolean {
-        return !email ? false : true;
+        if (!email) {
+            return false
+        }
+        const [local, domain] = email.split('@')
+        if (local.length > 64) {
+            return false
+        }
+        return true
     }
 }
