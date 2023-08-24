@@ -8,6 +8,6 @@ export class Email {
       return false
     }
     const [local, domain] = email.split('@')
-    return !(local.length === 0 || local.length > 64 || domain.length > 255)
+    return !(local.length === 0 || local.length > 64 || domain.length === 0 || domain.length > 255)
   }
 }
