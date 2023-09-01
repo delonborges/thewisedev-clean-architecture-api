@@ -15,8 +15,16 @@ export class Email {
       return false
     }
     const domainParts = domain.split('.')
-    return !domainParts.some(function (part: string | any[]) {
+    if (domainParts.some(function (part) {
       return part.length > 63
-    })
+    })) {
+      return false
+    }
+    // eslint-disable-next-line @typescript-eslint/naming-convention
+    const emailRegex = /^[-!#$%&'*+/0-9=?A-Z^_a-z`{|}~](\.?[-!#$%&'*+/0-9=?A-Z^_a-z`{|}~])*@[a-zA-Z0-9](-*\.?[a-zA-Z0-9])*\.[a-zA-Z](-?[a-zA-Z0-9])+$/
+    if (!emailRegex.test(email)) {
+      return false
+    }
+    return true
   }
 }

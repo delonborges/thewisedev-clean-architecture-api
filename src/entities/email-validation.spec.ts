@@ -33,8 +33,12 @@ describe('Email validation', () => {
     const email = 'delon@'
     expect(Email.validate(email)).toBeFalsy()
   })
-  test('should not domain with a part larger than 63 chars', () => {
+  test('should not accept domain with a part larger than 63 chars', () => {
     const email = 'delon@' + 'd'.repeat(64) + '.com'
+    expect(Email.validate(email)).toBeFalsy()
+  })
+  test('should not accept local part with invalid char', () => {
+    const email = 'delon borges@email.com'
     expect(Email.validate(email)).toBeFalsy()
   })
 })
