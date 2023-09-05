@@ -1,6 +1,10 @@
 // eslint-disable-next-line @typescript-eslint/no-extraneous-class
 export class Email {
   static validate (email: any): boolean {
+    const emailRegex = /^[-!#$%&'*+/0-9=?A-Z^_a-z`{|}~](\.?[-!#$%&'*+/0-9=?A-Z^_a-z`{|}~])*@[a-zA-Z0-9](-*\.?[a-zA-Z0-9])*\.[a-zA-Z](-?[a-zA-Z0-9])+$/
+    if (!emailRegex.test(email)) {
+      return false
+    }
     if (email == null || email === '') {
       return false
     }
@@ -15,14 +19,9 @@ export class Email {
       return false
     }
     const domainParts = domain.split('.')
-    if (domainParts.some(function (part) {
+    if (domainParts.some(function (part: string | any[]) {
       return part.length > 63
     })) {
-      return false
-    }
-    // eslint-disable-next-line @typescript-eslint/naming-convention
-    const emailRegex = /^[-!#$%&'*+/0-9=?A-Z^_a-z`{|}~](\.?[-!#$%&'*+/0-9=?A-Z^_a-z`{|}~])*@[a-zA-Z0-9](-*\.?[a-zA-Z0-9])*\.[a-zA-Z](-?[a-zA-Z0-9])+$/
-    if (!emailRegex.test(email)) {
       return false
     }
     return true

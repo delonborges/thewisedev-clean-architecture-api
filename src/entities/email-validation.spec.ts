@@ -37,8 +37,20 @@ describe('Email validation', () => {
     const email = 'delon@' + 'd'.repeat(64) + '.com'
     expect(Email.validate(email)).toBeFalsy()
   })
-  test('should not accept local part with invalid char', () => {
+  test('should not accept local part with space char', () => {
     const email = 'delon borges@email.com'
+    expect(Email.validate(email)).toBeFalsy()
+  })
+  test('should not accept local part with two dots', () => {
+    const email = 'delon..borges@email.com'
+    expect(Email.validate(email)).toBeFalsy()
+  })
+  test('should not accept local part with ending dot', () => {
+    const email = 'delonborges.@email.com'
+    expect(Email.validate(email)).toBeFalsy()
+  })
+  test('should not accept email without @', () => {
+    const email = 'delon.borgesemail.com'
     expect(Email.validate(email)).toBeFalsy()
   })
 })
